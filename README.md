@@ -38,5 +38,7 @@ yarn deploy
 ```
 
 This will build the project and deploy the result to Firebase via Hosting for static web resources and Cloud Functions
-for the
-Nitro server.
+for the Nitro server.
+
+I'd advise you'd do your own due diligence in reviewing the aforementioned scripts before running them, to understand
+how they work and what they do.
