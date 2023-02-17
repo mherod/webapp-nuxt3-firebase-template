@@ -1,0 +1,26 @@
+{
+  "functions": {
+    "codebase": "webapp-nuxt3-firebase-template",
+    "source": ".output/server",
+    "predeploy": [
+      "ts-node predeploy.ts"
+    ],
+    "runtime": "nodejs16"
+  },
+  "hosting": {
+    "site": "webapp-nuxt3-firebase-template",
+    "public": ".output/public",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "server"
+      }
+    ]
+  }
+}
