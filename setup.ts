@@ -5,11 +5,17 @@ const path = require("node:path");
 // @ts-ignore
 const readline = require("readline");
 
-async function readInput(
-  question: string,
-  orDefault: string = ""
-  //
-): Promise<string> {
+interface Input {
+  question: string;
+  example?: string;
+  orDefault?: string;
+}
+
+async function readInput({
+  question,
+  example = "",
+  orDefault = "",
+}: Input): Promise<string> {
   return new Promise((resolve) => {
     const cli = readline.createInterface({
       input: process.stdin,
@@ -17,6 +23,7 @@ async function readInput(
     });
     const prompt = [
       question?.trim(),
+      example ? `(e.g. ${example})` : null,
       orDefault ? `(default: ${orDefault})` : null,
     ]
       .filter(Boolean)
@@ -34,19 +41,28 @@ async function readInput(
 
 async function main() {
   const projectId = await readInput(
-    "Enter project ID",
-    path.basename(process.cwd())
+    {
+      question: "Enter project ID",
+      orDefault: path.basename(process.cwd()),
+      //
+    }
     //
   );
   const siteName = await readInput(
-    "Enter site name (e.g. enter my-site for my-site.web.app)",
-    projectId
+    {
+      question: "Enter site name",
+      example: "enter my-site for my-site.web.app",
+      orDefault: projectId,
+    }
     //
   );
   // const nodeEngine = "16";
   const nodeEngine = await readInput(
-    "Enter node engine version (e.g. enter 16 for nodejs16)",
-    "16"
+    {
+      question: "Enter node engine version",
+      example: "enter 16 for nodejs16",
+      orDefault: "16",
+    }
     //
   );
 
