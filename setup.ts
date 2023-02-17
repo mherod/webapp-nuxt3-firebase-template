@@ -15,7 +15,13 @@ async function readInput(
       input: process.stdin,
       output: process.stdout,
     });
-    cli.question(`${question?.trim()} `, (answer: string) => {
+    const prompt = [
+      question?.trim(),
+      orDefault ? `(default: ${orDefault})` : null,
+    ]
+      .filter(Boolean)
+      .join(" ");
+    cli.question(prompt + ": ", (answer: string) => {
       if (!answer) {
         resolve(orDefault);
       } else {
@@ -28,18 +34,18 @@ async function readInput(
 
 async function main() {
   const projectId = await readInput(
-    "Enter project ID:",
+    "Enter project ID",
     path.basename(process.cwd())
     //
   );
   const siteName = await readInput(
-    "Enter site name: (e.g. enter my-site for my-site.web.app)",
+    "Enter site name (e.g. enter my-site for my-site.web.app)",
     projectId
     //
   );
   // const nodeEngine = "16";
   const nodeEngine = await readInput(
-    "Enter node engine version: (e.g. enter 16 for nodejs16)",
+    "Enter node engine version (e.g. enter 16 for nodejs16)",
     "16"
     //
   );
