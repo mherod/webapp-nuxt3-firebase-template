@@ -40,10 +40,12 @@ async function readInput({
 }
 
 async function main() {
+  const cwd = process.cwd();
+  const basename = path.basename(cwd);
   const projectId = await readInput(
     {
       question: "Enter project ID",
-      orDefault: path.basename(process.cwd()),
+      orDefault: basename,
       //
     }
     //
