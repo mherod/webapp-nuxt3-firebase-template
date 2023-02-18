@@ -70,9 +70,8 @@ async function main() {
 
   editJson(".firebaserc", (json) => {
     json.projects = {
-      ...(json.projects || {
-        default: projectId,
-      }),
+      ...(json.projects || {}),
+      default: projectId,
     };
   });
 
@@ -80,10 +79,8 @@ async function main() {
     json.name = siteName;
     json.author = json.author || process.env.USER;
     json.engines = {
-      ...(json.engines || {
-        node: ">= " + nodeEngine,
-        //
-      }),
+      ...(json.engines || {}),
+      node: ">= " + nodeEngine,
     };
     if ("prettier" in json.devDependencies) {
       editJson(
