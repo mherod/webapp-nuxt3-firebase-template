@@ -106,9 +106,24 @@ async function main() {
     json.functions = {
       ...(json.functions || {}),
       codebase: siteName,
+      source: ".output/server",
       runtime: `nodejs${nodeEngine}`,
     };
+
+    const predeployFile = "predeploy.ts";
+    const deployFix = commandNode(predeployFile);
+    if (fs.existsSync(predeployFile)) {
+      const predeploy = json.functions.predeploy || [];
+      if (predeploy && !predeploy.includes(deployFix)) {
+        predeploy.push(deployFix);
+      }
+      json.functions.predeploy = predeploy;
+    }
   });
+}
+
+function commandNode(fileName: string) {
+  return (fileName.endsWith(".ts") ? `ts-node` : `node`) + " " + fileName;
 }
 
 function readJson(fileName: string) {

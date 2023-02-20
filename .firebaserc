@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "herod-dev"
+    "default": "webapp-nuxt3-firebase-template"
   }
 }
