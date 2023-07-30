@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
-    "firebase-admin": "^11.5.0",
+    "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.2.1",
     "firebase-functions-test": "^3.0.0",
     "fs-extra": "^11.1.0",
